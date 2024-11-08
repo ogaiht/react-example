@@ -1,11 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useSelector } from 'react-redux';
+import { selectIsAuthenticated } from './features/Authentication/authenticationSlice';
+import Dashboard from './components/Dashboard/Dashboard';
+import Login from './components/Login/Login';
+import Router from './components/Router/Router';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Header/Header';
 
 function App() {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
   return (
+    
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -17,8 +26,15 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
-      </header>
+        </a>  
+      </header>    */}
+      { isAuthenticated ?
+      ( 
+        <>
+          <Header title='Application'/>          
+          <Router/>          
+        </>
+      ): <Login/> }
     </div>
   );
 }
